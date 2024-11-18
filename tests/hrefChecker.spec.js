@@ -4,7 +4,7 @@
 const { test, expect } = require("@playwright/test");
 
 // Define the URL of the website to be tested
-const TestSite = "https://www.inmotionhosting.com/";
+const TestSite = "https://ultimateqa.com/automation";
 
 // Initialize empty arrays to store the links
 const intLinks = []; // Internal Links
@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 // This test extracts all the hrefs from the current page and logs them to the console.
-test("Href Grabber", async ({ page }) => {
+test("Page Href Grabber", async ({ page }) => {
   // Use page.evaluate to extract all the hrefs from the page
   const hrefs = await page.evaluate(() => {
     return Array.from(document.links).map((item) => item.href);
@@ -41,7 +41,7 @@ test("Href Grabber", async ({ page }) => {
 });
 
 // This test crawls the website, extracts the links, and categorizes them into internal, external, or failed links.
-test("Internal Hrefs", async ({ page }) => {
+test("Nav page Hrefs", async ({ page }) => {
   // Initialize an empty array to store all the links
   const allLinks = [];
 
