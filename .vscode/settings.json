@@ -1,0 +1,11 @@
+{
+  "java.import.maven.disableTestClasspathFlag": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+  "explorer.expandSingleFolderWorkspaces": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonEmptyParenthesis": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
+}
