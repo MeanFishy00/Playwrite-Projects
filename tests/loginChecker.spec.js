@@ -1,45 +1,47 @@
-/**
- * Tests the login functionality of the Sauce Demo website.
- *
- * This test navigates to the Sauce Demo website, fills in the username and password
- * fields, and clicks the login button. It then asserts that the user is redirected
- * to the inventory page.
- */
 const { test, expect } = require("@playwright/test");
-const { error } = require("console");
+const { LoginPage } = require("../pages/loginflow");
 
-test("login checker", async ({ page }) => {
-  // Navigate to the Sauce Demo login page
+// Before each test, navigate to the Sauce Demo login page
+test.beforeEach(async ({ page }) => {
   await page.goto("https://www.saucedemo.com/");
-
-  // Fill in login credentials using placeholder text to locate elements
-  await page.getByPlaceholder("Username").fill("standard_user");
-  await page.getByPlaceholder("Password").fill("secret_sauce");
-
-  // Click the login button using accessibility role selector
-  await page.getByRole("button", { name: "Login" }).click();
-
-  // Verify successful login by checking if URL matches the inventory page
-  await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
 });
 
-test("locked user", async ({ page }) => {
-  // Navigate to the Sauce Demo login page
-  await page.goto("https://www.saucedemo.com/");
+/**
+ * Test the login flow with standard user credentials.
+ */
+test("login with standard user", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.standardUserFlow();
+});
 
-  // Fill in login credentials using placeholder text to locate elements
-  await page.getByPlaceholder("Username").fill("locked_out_user");
-  await page.getByPlaceholder("Password").fill("secret_sauce");
+/**
+ * Test the login flow with locked out user credentials.
+ */
+test("login with locked user", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.lockedUserFlow();
+});
 
-  // Click the login button using accessibility role selector
-  await page.getByRole("button", { name: "Login" }).click();
+/**
+ * Test the login flow with problem user credentials.
+ */
+test("login with problem user", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.problemUserFlow();
+});
 
-  // Looks for error message to appear
-  let err = (await page.locator('[data-test="error"]').innerText());
+/**
+ * Test the login flow with performance glitch user credentials.
+ */
+test("login with performance user", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.performanceUserFlow();
+});
 
-  // Prints the Error message
-  console.log("Error Message: " + err)
-
-  // Verify successful login by checking if URL matches the inventory page
-  await expect(page).toHaveURL("https://www.saucedemo.com/");
+/**
+ * Test the login flow with visual user credentials.
+ */
+test("login with visual user", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.visualUserFlow();
 });
